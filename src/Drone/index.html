@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crazyflie Blockly Controller</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://unpkg.com/blockly/blockly.min.js"></script>
+    <script src="https://unpkg.com/blockly/javascript_compressed"></script>
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@latest/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@latest/examples/jsm/"
+            }
+        }
+    </script>
+    
+    <!-- code preview -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <!--  -->
+    <script type="module" src="script.js"></script>
+
+    <style>
+      body {
+        display: flex;
+        height: 100vh;
+      }
+      #blocklyDiv {
+        height: 100%;
+        width: 70%;
+      }
+      #divider {
+        width: 5px;
+        cursor: ew-resize;
+        background-color: #aaa;
+      }
+      #dividerh {
+        width: 100%;
+        height: 5px;
+        cursor: ns-resize;
+        background-color: #aaa;
+      }
+    </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+  const blocklyDiv = document.getElementById('blocklyDiv');
+  const divider = document.getElementById('divider');
+  const dividerh = document.getElementById('divideh');
+  const rightColumn = document.getElementById('rightColumn');
+  
+  const simulator = document.getElementById('simulator');
+  const codeOutput = document.getElementById('codeOutput');
+
+  // Ensure Blockly workspace is initialized
+  // const workspace = Blockly.inject('blocklyDiv', {
+  //   toolbox: document.getElementById('toolbox'),
+  // });
+
+  let isResizing = null; // 'horizontal' or 'vertical'
+
+  // Horizontal resize start
+  divider.addEventListener('mousedown', () => {
+    isResizing = 'horizontal';
+    document.body.style.cursor = 'ew-resize';
+  });
+
+  // // Vertical resize start
+  // dividerh.addEventListener('mousedown', () => {
+  //   isResizing = 'vertical';
+  //   document.body.style.cursor = 'ns-resize';
+  // });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!isResizing) return;
+
+    if (isResizing === 'horizontal') {
+      const newWidth = (e.clientX / window.innerWidth) * 100;
+      if (newWidth > 10 && newWidth < 90) {
+        blocklyDiv.style.width = `${newWidth}%`;
+        rightColumn.style.width = `${100 - newWidth}%`;
+        Blockly.svgResize(workspace); // Dynamically resize Blockly
+      }
+    }
+
+    // if (isResizing === 'vertical') {
+    //   const newHeight = (e.clientY / window.innerHeight) * 100;
+    //   if (newHeight > 10 && newHeight < 90) {
+    //     simulator.style.height = `${newHeight}%`;
+    //     codeOutput.style.height = `${100 - newHeight}%`;
+    //   }
+    // }
+  });
+
+  window.addEventListener('mouseup', () => {
+    isResizing = null;
+    document.body.style.cursor = 'default';
+  });
+});
+
+    </script>
+  </head>
+  <body>
+    <div id="blocklyDiv" style="width: 100%;"></div>
+
+    <div id="divider"></div>
+
+    <div id="rightColumn">
+      <div id="simulator">
+        <h3>3D Simulator</h3>
+        <button id="runButton">Run</button>
+        <div id="simulatorContainer"></div>
+
+        <!-- <canvas id="simulationCanvas"></canvas> -->
+      </div>
+
+      <div id="dividerh"></div>
+
+      <div id="codeOutput">
+        <h3>Live Code</h3>
+        <pre id="generatedCode"></pre>
+      </div>
+    </div>
+    <xml id="toolbox" style="display: none">
+      <category name="Takeoff">
+        <block type="takeoff"></block>
+        <block type="takeoff_after"></block>
+      </category>
+      <category name="Navigation">
+        <block type="wait"></block>
+        <block type="fly"></block>
+        <block type="circle"></block>
+        <block type="yaw"></block>
+      </category>
+      <category name="Land">
+        <block type="land"></block>
+        <block type="land_after"></block>
+      </category>
+      <category name="Control">
+        <block type="controls_if"></block>
+      <category name="Logic">
+        <block type="logic_compare"></block>
+        <block type="logic_operation"></block>
+        <block type="logic_boolean"></block>
+      </category>
+    </xml>
+
+    <!-- <script type="module" src="./simulator.js"></script> -->
+</body>
+</html>
