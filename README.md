@@ -219,6 +219,58 @@ Dapi/
 
 ---
 
+## Future Direction
+
+Dapi is just getting started. Here's where the project is headed:
+
+### 🔧 Real Flight-Controller Code Generation
+
+Right now Dapi generates Blockly → JavaScript for simulation. The next major step is **compiling Blockly programs into real firmware code** that runs on actual drone flight-controller boards:
+
+- **ArduPilot / PX4 support** — generate MAVLink command sequences or Lua scripts from Blockly blocks
+- **Multi-board compatibility** — support popular boards like Pixhawk, Betaflight FC, ESP32-based controllers, and DJI SDKs
+- **One-click flash** — connect a board over USB and flash the generated mission directly from the browser (Web Serial API)
+- **Hardware-in-the-loop testing** — validate generated code against a real flight controller before flying
+
+### 🎮 Upgraded Simulation
+
+The 3D simulator will evolve into a more realistic training environment:
+
+- **Realistic physics** — wind, gravity, battery drain, motor response curves, and inertia modeling
+- **Environment variety** — indoor rooms, urban landscapes, forests, and warehouses to practice in
+- **Collision detection** — obstacle avoidance feedback during simulation
+- **Multi-drone simulation** — plan and simulate swarm missions with multiple drones
+
+### 📷 Computer Vision & Sensor Modules
+
+Adding vision and sensing capabilities to the Blockly toolbox:
+
+- **Camera feed integration** — stream a live or simulated video feed into the workspace
+- **Object detection blocks** — "If drone sees [person / car / tree] then …" using YOLO or similar models
+- **Video-reactive flight** — blocks that adjust the flight path based on what the camera detects in real time
+- **Sensor fusion** — combine GPS, IMU, LiDAR, and camera data in the block programming model
+
+### 🤖 Autonomous Flight Control
+
+Moving toward fully autonomous drone intelligence:
+
+- **Waypoint mission planning** — draw flight paths on a map and export to real GPS coordinates
+- **Auto-landing & return-to-home** — intelligent safety blocks that handle emergencies
+- **Adaptive flight** — the drone adjusts its route dynamically based on sensor input
+- **Reinforcement-learning policies** — train RL agents inside the simulator, then deploy to real hardware
+
+### 🌍 Community & Ecosystem
+
+Building a community around drone programming education and open-source autonomy:
+
+- **Block library sharing** — publish and import community-created block packs (e.g., "agriculture survey", "search & rescue")
+- **Mission templates** — a gallery of ready-to-use missions contributed by the community
+- **Plugin system** — let developers extend Dapi with custom blocks, sensors, and board targets
+- **Integration with ROS 2** — bridge Dapi missions to Robot Operating System for advanced robotics pipelines
+- **Educational curriculum** — structured lessons for schools and workshops teaching drone programming with Dapi
+
+---
+
 ## Troubleshooting
 
 | Problem | Fix |
