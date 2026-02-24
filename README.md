@@ -9,6 +9,10 @@
   Describe a flight mission in plain English → get executable Blockly code → simulate it in 3D.
 </p>
 
+<video width="600" controls>
+  <source src="assets/demo.mp4" type="video/mp4">
+</video>
+
 <p align="center">
   <a href="https://huggingface.co/Alentito/qwen2.5-3b-dapi-finetuned">🤗 Model on HuggingFace</a> ·
   <a href="#quick-start">Quick Start</a> ·
