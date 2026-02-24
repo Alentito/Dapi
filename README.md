@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="src/assets/Dapi6.svg" alt="Dapi Logo" width="120" />
+  <img src="src/assets/1764878217963.png" alt="Dapi Logo" width="120" />
 </p>
 
 <h1 align="center">Dapi</h1>
